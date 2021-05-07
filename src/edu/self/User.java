@@ -14,20 +14,30 @@ public class User {
     public User(String firstName, String lastName, String secretPin, Bank theBank) {
         this.firstName = firstName;
         this.lastName = lastName;
-
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            this.secretPinHash = messageDigest.digest(secretPin.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        this.UUID = theBank.generateUUID();
+        this.secretPinHash = theBank.generatePinHash(secretPin);
+        this.UUID = theBank.generateUUID().substring(0,8);
         this.accounts = new ArrayList<Account>();
 
-        System.out.printf("New user %s, %s with UUID %s was created.\n", lastName, firstName, this.UUID);
+        System.out.printf("New user %s, %s with UUID %s was created.\n", this.lastName, this.firstName, this.UUID);
+    }
+
+    public boolean validatePin(String aPin) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.secretPinHash);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Error, caught NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
     }
 
     public String getUUID() {
         return this.UUID;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
     }
 }
