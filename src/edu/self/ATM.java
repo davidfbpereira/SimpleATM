@@ -18,7 +18,7 @@ public class ATM {
             System.out.println("\tATM is shutting down...");
             System.exit(1);
         } else {
-            System.out.printf("\tWelcome %s, please select one of the following actions:\n", currentUser.getFirstName());
+            System.out.printf("\n\tWelcome back %s!\n", currentUser.getFirstName());
             ATM.printUserMenu(currentUser);
         }
 
@@ -75,6 +75,55 @@ public class ATM {
     }
 
     public static void printUserMenu(User currentUser) {
+        System.out.println("\n\tYour accounts summary:");
+
         currentUser.printAccountsSummary();
+
+        System.out.println("\tPlease enter operation number:");
+
+        Scanner input = new Scanner(System.in);
+        int operation;
+        do {
+            System.out.println("\t\t1) Show account transaction history");
+            System.out.println("\t\t2) Withdraw");
+            System.out.println("\t\t3) Deposit");
+            System.out.println("\t\t4) Transfer");
+            System.out.println("\t\t5) Quit");
+            System.out.println();
+
+            System.out.print("\t\tEnter operation number: ");
+            operation = input.nextInt();
+
+            if (operation < 1 || operation > 5) {
+                System.out.println("\n\tInvalid action.");
+                System.out.println("\tPlease try again:");
+            }
+        } while (operation < 1 || operation > 5);
+
+        // process the choice
+        switch (operation) {
+            case 1:
+                //Bank.showTransHistory(theUser);
+                break;
+            case 2:
+                //ATM.withdrawFunds(theUser);
+                break;
+            case 3:
+                //ATM.depositFunds(theUser);
+                break;
+            case 4:
+                //ATM.transferFunds(theUser);
+                break;
+            case 5:
+                ATM.sayGoodBye();
+                System.exit(1);
+                break;
+        }
+        ATM.printUserMenu(currentUser);
+    }
+
+    public static void sayGoodBye() {
+        System.out.println("\n\tThank you, come again!");
+        System.out.println("\tATM is shutting down...");
     }
 }
