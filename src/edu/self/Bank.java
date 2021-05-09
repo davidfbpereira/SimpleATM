@@ -38,6 +38,18 @@ public class Bank {
         return aSecretPinHash;
     }
 
+    public boolean validatePin(String thePin, byte[] userSecretPinHash) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return MessageDigest.isEqual(md.digest(thePin.getBytes()), userSecretPinHash);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Error, caught NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
+
     public String generateUUID() {
         Boolean unique = false;
         UUID uuid;
@@ -57,8 +69,10 @@ public class Bank {
 
     public User userLogin(String userUUID, String pin) {
         for (User user : this.users) {
-            if (user.getUUID().compareTo(userUUID) == 0 && user.validatePin(pin)) {
-                return user;
+            if (user.getUUID().compareTo(userUUID) == 0) {
+                if (validatePin(pin, user.getSecretPinHash())) {
+                    return user;
+                }
             }
         }
         return null;
@@ -82,10 +96,6 @@ public class Bank {
             }
             System.out.println("\n\tInvalid account index. Please try again.");
         } while (true);
-    }
-
-    public ArrayList<Account> getAccounts(User theUser) {
-        return theUser.getAccounts();
     }
 
     public String getName() {

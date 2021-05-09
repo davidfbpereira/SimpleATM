@@ -23,18 +23,6 @@ public class User {
         System.out.printf("New user %s, %s with UUID %s was created.\n", this.lastName, this.firstName, this.UUID);
     }
 
-    public boolean validatePin(String aPin) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.secretPinHash);
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error, caught NoSuchAlgorithmException");
-            e.printStackTrace();
-            System.exit(1);
-        }
-        return false;
-    }
-
     public void addAccount(String name, Bank theBank) {
         Account newAccount = new Account(name, theBank);
         this.accounts.add(newAccount);
@@ -57,5 +45,9 @@ public class User {
 
     public ArrayList<Account> getAccounts() {
         return this.accounts;
+    }
+
+    public byte[] getSecretPinHash() {
+        return this.secretPinHash;
     }
 }
