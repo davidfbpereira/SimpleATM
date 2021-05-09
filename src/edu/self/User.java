@@ -18,6 +18,8 @@ public class User {
         this.UUID = theBank.generateUUID().substring(0,8);
         this.accounts = new ArrayList<Account>();
 
+        addAccount("Checking Account", theBank);
+
         System.out.printf("New user %s, %s with UUID %s was created.\n", this.lastName, this.firstName, this.UUID);
     }
 
@@ -31,6 +33,20 @@ public class User {
             System.exit(1);
         }
         return false;
+    }
+
+    public void addAccount(String name, Bank theBank) {
+        Account newAccount = new Account(name, theBank);
+        this.accounts.add(newAccount);
+    }
+
+    public void printAccountsSummary() {
+        System.out.printf("\n\t%s's accounts summary:\n", this.firstName);
+
+        for(Account account : this.accounts) {
+            System.out.printf("\t\t%s\n", account.getSummaryLine());
+        }
+        System.out.println();
     }
 
     public String getUUID() {

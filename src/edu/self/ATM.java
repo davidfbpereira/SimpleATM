@@ -19,7 +19,7 @@ public class ATM {
             System.exit(1);
         } else {
             System.out.printf("\tWelcome %s, please select one of the following actions:\n", currentUser.getFirstName());
-//            ATM.printUserMenu(currentUser);
+            ATM.printUserMenu(currentUser);
         }
 
     }
@@ -72,5 +72,9 @@ public class ATM {
             }
         }
         return null;
+    }
+
+    public static void printUserMenu(User currentUser) {
+        currentUser.printAccountsSummary();
     }
 }
