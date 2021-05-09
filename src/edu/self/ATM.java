@@ -26,7 +26,8 @@ public class ATM {
 
     public static Bank populateBank(String bankName) {
         Bank aBank = new Bank(bankName);
-        aBank.addUser("Dévis", "NastyByNature", "1234");
+        User aUser = aBank.addUser("Dévis", "NastyByNature", "1234");
+        aBank.addUserAccount(aUser, "Savings Account");
 
         return aBank;
     }

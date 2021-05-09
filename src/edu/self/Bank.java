@@ -15,9 +15,15 @@ public class Bank {
         this.users = new ArrayList<User>();
     }
 
-    public void addUser(String firstName, String lastName, String pin) {
+    public User addUser(String firstName, String lastName, String pin) {
         User newUser = new User(firstName, lastName, pin, this);
         this.users.add(newUser);
+
+        return newUser;
+    }
+
+    public void addUserAccount(User theUser, String name) {
+        theUser.addAccount(name, this);
     }
 
     public byte[] generatePinHash(String theSecretPin) {

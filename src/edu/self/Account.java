@@ -16,7 +16,7 @@ public class Account {
     public void printAccountTransactionHistory() {
         String summaryLine;
         if (this.transactions.size() == 0) {
-            System.out.printf("\n\tAccount %s has no transaction history yet.", this.UUID);
+            System.out.printf("\n\tAccount %s has no transactions yet.", this.UUID);
         } else {
             System.out.printf("\n\tTransaction history for account %s:", this.UUID);
 
