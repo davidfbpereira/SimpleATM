@@ -13,6 +13,21 @@ public class Account {
         this.transactions = new ArrayList<Transaction>();
     }
 
+    public void printAccountTransactionHistory() {
+        String summaryLine;
+        if (this.transactions.size() == 0) {
+            System.out.printf("\n\tAccount %s has no transaction history yet.", this.UUID);
+        } else {
+            System.out.printf("\n\tTransaction history for account %s:", this.UUID);
+
+            for (int i = this.transactions.size() - 1; i >= 0; i--) {
+                summaryLine = this.transactions.get(i).getSummaryLine();
+                System.out.println(summaryLine);
+            }
+        }
+        System.out.println();
+    }
+
     public String getSummaryLine() {
         double balance = this.getAccountBalance();
 
@@ -29,5 +44,9 @@ public class Account {
             balance += transaction.getAmount();
         }
         return balance;
+    }
+
+    public String getUUID() {
+        return this.UUID;
     }
 }

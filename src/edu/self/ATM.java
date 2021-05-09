@@ -84,7 +84,7 @@ public class ATM {
         Scanner input = new Scanner(System.in);
         int operation;
         do {
-            System.out.println("\t\t1) Show account transaction history");
+            System.out.println("\t\t1) Check account history");
             System.out.println("\t\t2) Withdraw");
             System.out.println("\t\t3) Deposit");
             System.out.println("\t\t4) Transfer");
@@ -100,10 +100,9 @@ public class ATM {
             }
         } while (operation < 1 || operation > 5);
 
-        // process the choice
         switch (operation) {
             case 1:
-                //Bank.showTransHistory(theUser);
+                Bank.showTransactionHistory(currentUser);
                 break;
             case 2:
                 //ATM.withdrawFunds(theUser);

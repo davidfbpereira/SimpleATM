@@ -54,4 +54,8 @@ public class User {
     public String getFirstName() {
         return this.firstName;
     }
+
+    public ArrayList<Account> getAccounts() {
+        return this.accounts;
+    }
 }

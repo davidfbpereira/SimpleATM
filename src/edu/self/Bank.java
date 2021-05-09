@@ -3,6 +3,7 @@ package edu.self;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Bank {
@@ -49,12 +50,36 @@ public class Bank {
     }
 
     public User userLogin(String userUUID, String pin) {
-        for(User user : this.users) {
-            if(user.getUUID().compareTo(userUUID) == 0 && user.validatePin(pin)) {
+        for (User user : this.users) {
+            if (user.getUUID().compareTo(userUUID) == 0 && user.validatePin(pin)) {
                 return user;
             }
         }
         return null;
+    }
+
+    public static void showTransactionHistory(User theUser) {
+        Scanner input = new Scanner(System.in);
+        String accountUUID;
+        ArrayList<Account> userAccounts;
+
+        do {
+            System.out.print("\n\tEnter your account UUID: ");
+            accountUUID = input.next();
+
+            userAccounts = theUser.getAccounts();
+            for (Account account : userAccounts) {
+                if (account.getUUID().compareTo(accountUUID) == 0) {
+                    account.printAccountTransactionHistory();
+                    return;
+                }
+            }
+            System.out.println("\n\tInvalid account index. Please try again.");
+        } while (true);
+    }
+
+    public ArrayList<Account> getAccounts(User theUser) {
+        return theUser.getAccounts();
     }
 
     public String getName() {
