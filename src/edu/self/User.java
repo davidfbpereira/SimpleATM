@@ -50,4 +50,13 @@ public class User {
     public byte[] getSecretPinHash() {
         return this.secretPinHash;
     }
+
+    public Account getAccount(String theAccountUUID) {
+        for (Account account : accounts) {
+            if (account.getUUID().equals(theAccountUUID)) {
+                return account;
+            }
+        }
+        return null;
+    }
 }

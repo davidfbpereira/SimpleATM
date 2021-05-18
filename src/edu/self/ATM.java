@@ -112,7 +112,7 @@ public class ATM {
                 //ATM.depositFunds(theUser);
                 break;
             case 4:
-                //ATM.transferFunds(theUser);
+                Bank.transferFunds(currentUser);
                 break;
             case 5:
                 ATM.sayGoodBye();

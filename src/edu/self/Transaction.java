@@ -7,6 +7,11 @@ public class Transaction {
     private Date timestamp;
     private String memo;
 
+    public Transaction(double amount, String memo) {
+        this.amount = amount;
+        this.timestamp = new Date();
+        this.memo = memo;
+    }
 
     public String getSummaryLine() {
         if (this.amount >= 0) {

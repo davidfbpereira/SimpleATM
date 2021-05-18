@@ -9,7 +9,7 @@ public class Account {
 
     public Account(String name, Bank theBank) {
         this.name = name;
-        this.UUID = theBank.generateUUID();
+        this.UUID = theBank.generateUUID().substring(9,13);
         this.transactions = new ArrayList<Transaction>();
     }
 
@@ -48,5 +48,10 @@ public class Account {
 
     public String getUUID() {
         return this.UUID;
+    }
+
+    public void addTransaction(double amount, String memo) {
+        Transaction transaction = new Transaction(amount, memo);
+        this.transactions.add(transaction);
     }
 }

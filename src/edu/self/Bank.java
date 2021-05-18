@@ -98,6 +98,53 @@ public class Bank {
         } while (true);
     }
 
+    public static void transferFunds(User theUser) {
+        Scanner input = new Scanner(System.in);
+        String fromAccountUUID, toAccountUUID;
+        Account fromAccount, toAccount;
+        double amount, balance;
+
+        do {
+            System.out.println("Enter account number to transfer from: ");
+            fromAccountUUID = input.next();
+
+            fromAccount = theUser.getAccount(fromAccountUUID);
+
+            if (fromAccount == null) {
+                System.out.println("Invalid user account. Please try again.");
+            }
+        } while (fromAccount == null);
+
+        do {
+            System.out.println("Enter account number to transfer to: ");
+            toAccountUUID = input.next();
+
+            toAccount = theUser.getAccount(toAccountUUID);
+
+            if (toAccount == null) {
+                System.out.println("Invalid user account. Please try again.");
+            }
+        } while (toAccount == null);
+
+        balance = fromAccount.getAccountBalance();
+
+        do {
+            System.out.printf("Enter the amount to transfer (max $%.02f)): $", balance);
+            amount = input.nextDouble();
+
+            if (amount < 0) {
+                System.out.println("Amount must be greater than zero.");
+            } else if (amount > balance) {
+                System.out.printf("Amount must not be greater than balance of $%.02f.\n", balance);
+            }
+        } while (amount < 0 || amount > balance);
+
+        fromAccount.addTransaction(-1 * amount, String.format("Transfer to account %s", toAccountUUID));
+        toAccount.addTransaction(amount, String.format("Transfer from account %s", fromAccountUUID));
+
+        System.out.println("Transfer was successful!");
+    }
+
     public String getName() {
         return this.name;
     }
