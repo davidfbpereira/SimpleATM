@@ -106,10 +106,10 @@ public class ATM {
                 Bank.showTransactionHistory(currentUser);
                 break;
             case 2:
-                //ATM.withdrawFunds(theUser);
+                Bank.withdrawFunds(currentUser);
                 break;
             case 3:
-                //ATM.depositFunds(theUser);
+                Bank.depositFunds(currentUser);
                 break;
             case 4:
                 Bank.transferFunds(currentUser);

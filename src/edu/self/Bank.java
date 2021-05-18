@@ -115,6 +115,36 @@ public class Bank {
         System.out.println("Transfer was successful!");
     }
 
+    public static void withdrawFunds(User theUser) {
+        Account fromAccount;
+        double amount, balance;
+
+        fromAccount = theUser.getInputAccount();
+
+        balance = fromAccount.getAccountBalance();
+
+        amount = theUser.getAmountToTransfer(balance);
+
+        fromAccount.addTransaction(-1 * amount, String.format("Withdraw from %s", fromAccount.getUUID()));
+
+        System.out.println("Transfer was successful!");
+    }
+
+    public static void depositFunds(User theUser) {
+        Account toAccount;
+        double amount, balance;
+
+        toAccount = theUser.getInputAccount();
+
+        balance = toAccount.getAccountBalance();
+
+        amount = theUser.getAmountToTransfer(balance);
+
+        toAccount.addTransaction(amount, String.format("Deposit to %s", toAccount.getUUID()));
+
+        System.out.println("Transfer was successful!");
+    }
+
     public String getName() {
         return this.name;
     }
