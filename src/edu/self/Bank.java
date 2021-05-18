@@ -132,13 +132,11 @@ public class Bank {
 
     public static void depositFunds(User theUser) {
         Account toAccount;
-        double amount, balance;
+        double amount;
 
         toAccount = theUser.getInputAccount();
 
-        balance = toAccount.getAccountBalance();
-
-        amount = theUser.getAmountToTransfer(balance);
+        amount = theUser.getAmountToDeposit();
 
         toAccount.addTransaction(amount, String.format("Deposit to %s", toAccount.getUUID()));
 

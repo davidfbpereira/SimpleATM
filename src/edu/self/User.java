@@ -97,4 +97,20 @@ public class User {
 
         return amount;
     }
+
+    public double getAmountToDeposit() {
+        Scanner input = new Scanner(System.in);
+        double amount;
+
+        do {
+            System.out.printf("Enter the amount to transfer): $");
+            amount = input.nextDouble();
+
+            if (amount < 0) {
+                System.out.println("Amount must be greater than zero.");
+            }
+        } while (amount < 0);
+
+        return amount;
+    }
 }
